@@ -1,8 +1,14 @@
 import { React, useTransition } from "react";
-import { Button, TextInput, StyleSheet, Text, View } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const Flex = () => {
+const Login = () => {
   return (
     <View
       style={[
@@ -13,19 +19,21 @@ const Flex = () => {
       ]}
     >
       <View style={styles.containerLogin}>
-        <Icon style={styles.icon} name="user" size={100} color="#000" />
-        <Text style={styles.login}> login</Text>
+        <Icon name="user-circle-o" size={120} color="#000" />
+
+        <Text style={styles.loginText}> login</Text>
+
         <TextInput style={styles.input} />
-        <Text style={styles.senha}> senha</Text>
+
+        <Text style={styles.senhaText}> senha</Text>
         <TextInput style={styles.input} secureTextEntry={true} />
-      </View>
+        <TouchableOpacity style={styles.botaoLog}>
+          <Text style={styles.botaoLogin}>Login</Text>
+        </TouchableOpacity>
 
-      <View style={styles.botaoLogin}>
-        <Button style={styles.botaoLogin} title="Login" />
-      </View>
-
-      <View style={styles.botaoCadastro}>
-        <Button style={styles.botaoCadastro} title="cadastre-se" />
+        <TouchableOpacity style={styles.botaoCad}>
+          <Text style={styles.botaoCadastro}>Cadastre-se</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -34,45 +42,62 @@ const Flex = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: "#F2F2F2",
     alignItems: "center",
   },
   containerLogin: {
-    top: "15%",
-    justifyContent: "center",
+    top: "20%",
     alignItems: "center",
     width: "100%",
   },
   input: {
-    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 55,
     width: "85%",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     top: "32%",
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
   },
-  icon: {
-    top: "20%",
-  },
-  login: {
-    top: "30%",
-    right: "30%",
+  loginText: {
     fontSize: 30,
+    marginTop: 70,
+    width: "85%",
   },
-  senha: {
-    top: "30%",
-    right: "30%",
+  senhaText: {
     fontSize: 30,
+    marginTop: 30,
+    width: "85%",
+  },
+  botaoLog: {
+    width: "85%",
+    height: 70,
+    backgroundColor: "#035BFF",
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
   botaoLogin: {
-    height: 50,
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#ffff",
+  },
+  botaoCad: {
     width: "85%",
-    top: "32%",
+    height: 70,
+    backgroundColor: "#FF1010",
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
   botaoCadastro: {
-    height: 50,
-    width: "85%",
-    top: "34%",
-    color: "red",
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#ffff",
   },
 });
 
-export default Flex;
+export default Login;
