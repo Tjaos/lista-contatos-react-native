@@ -1,4 +1,4 @@
-import { React, useTransition } from "react";
+import { React } from "react";
 import {
   TextInput,
   StyleSheet,
@@ -7,8 +7,35 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Login = () => {
+function CadastroScreen({ navigation }) {
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          flexDirection: "column",
+        },
+      ]}
+    >
+      <View style={styles.containerCadastro}>
+        <Text style={styles.loginText}> E-mail</Text>
+
+        <TextInput style={styles.input} />
+
+        <Text style={styles.senhaText}> Senha</Text>
+        <TextInput style={styles.input} secureTextEntry={true} />
+        <TouchableOpacity style={styles.botaoLog}>
+          <Text style={styles.botaoLogin}>Salvar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+function LoginScreen({ navigation }) {
   return (
     <View
       style={[
@@ -31,13 +58,43 @@ const Login = () => {
           <Text style={styles.botaoLogin}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botaoCad}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Cadastro")}
+          style={styles.botaoCad}
+        >
           <Text style={styles.botaoCadastro}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-};
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="Cadastro"
+          component={CadastroScreen}
+          options={{
+            title: "Usuário",
+
+            headerStyle: {
+              backgroundColor: "#035BFF",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -50,6 +107,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
+  containerCadastro: {
+    top: "10%",
+    alignItems: "center",
+    width: "100%",
+  },
+
   input: {
     alignItems: "center",
     justifyContent: "center",
@@ -100,4 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default App;
