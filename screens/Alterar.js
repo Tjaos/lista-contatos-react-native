@@ -44,6 +44,13 @@ export default function InserirScreen({ route, navigation }) {
       });
   }
 
+  async function excluirDados() {
+    await axios
+      .delete(`${apiProfessorNilson}/${getId}`)
+      .then(() => navigation.navigate("Listar"))
+      .catch((error) => console.log(error));
+  }
+
   return (
     <View>
       <Header
@@ -91,6 +98,12 @@ export default function InserirScreen({ route, navigation }) {
         >
           <Text style={styles.botaoLogin}>Alterar</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.botaoExcluir}
+          onPress={() => excluirDados()}
+        >
+          <Text style={styles.botaoLogin}>Excluir</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -132,5 +145,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "#ffff",
+  },
+  botaoExcluir: {
+    width: "85%",
+    height: 70,
+    backgroundColor: "red",
+    marginTop: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
