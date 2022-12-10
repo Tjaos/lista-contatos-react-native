@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Listar">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Listar"
           component={ListaScreen}
@@ -24,7 +24,11 @@ export default function App() {
           component={AlterarScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Inserir"
           component={InserirScreen}

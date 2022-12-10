@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Header } from "react-native-elements";
+
 export default function LoginScreen({ navigation }) {
   return (
     <View
@@ -17,6 +19,14 @@ export default function LoginScreen({ navigation }) {
         },
       ]}
     >
+      <Header
+        centerComponent={{
+          text: "Login",
+          style: {
+            color: "#fff",
+          },
+        }}
+      />
       <View style={styles.containerLogin}>
         <Icon name="user-circle-o" size={120} color="#000" />
 
@@ -48,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   containerLogin: {
-    top: "20%",
+    top: "1%",
     alignItems: "center",
     width: "100%",
   },
@@ -64,7 +74,7 @@ const styles = StyleSheet.create({
     height: 55,
     width: "85%",
     backgroundColor: "#ffffff",
-    top: "32%",
+    top: "2%",
     borderRightWidth: 1,
     borderLeftWidth: 1,
     borderTopWidth: 1,
