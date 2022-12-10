@@ -10,6 +10,7 @@ import {
 import { ListItem, Avatar, Header } from "react-native-elements";
 import axios from "axios";
 import { apiProfessorNilson } from "../helpers/api";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 export default function InserirScreen({ route, navigation }) {
   const [getNome, setNome] = useState();
@@ -35,19 +36,34 @@ export default function InserirScreen({ route, navigation }) {
         telefone: getTelefone,
         cpf: getCpf,
       })
-      .then(() => navigation.navigate("Listar"))
+      .then(() =>
+        showMessage({
+          message: "Registro alterado com sucesso!",
+          type: "success",
+        })
+      )
       .catch((error) => console.log(error));
   }
 
   async function excluirDados() {
     await axios
       .delete(`${apiProfessorNilson}/${getId}`)
-      .then(() => navigation.navigate("Listar"))
+      .then(
+        showMessage({
+          message: "registro excluído com sucesso!",
+          type: "danger",
+        }),
+        setNome(null),
+        setTelefone(null),
+        setCpf(null),
+        setId(null)
+      )
       .catch((error) => console.log(error));
   }
 
   return (
     <View>
+      <FlashMessage position="top" />
       <Header
         leftComponent={{
           icon: "arrow-back",
