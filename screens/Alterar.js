@@ -35,13 +35,8 @@ export default function InserirScreen({ route, navigation }) {
         telefone: getTelefone,
         cpf: getCpf,
       })
-
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .then(() => navigation.navigate("Listar"))
+      .catch((error) => console.log(error));
   }
 
   async function excluirDados() {
