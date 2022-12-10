@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { Header, Button } from "react-native-elements";
 import { ListItem, Avatar } from "react-native-elements";
 import axios from "axios";
+import { apiProfessorNilson } from "../helpers/api";
 
 export default function ListaScreen({ route, navigation }) {
   const [list, setlist] = useState([]);
@@ -11,7 +12,7 @@ export default function ListaScreen({ route, navigation }) {
   useEffect(() => {
     function consultarDados() {
       axios
-        .get("http://professornilson.com/testeservico/clientes")
+        .get(`${apiProfessorNilson}`)
 
         .then(function (response) {
           setlist(response.data);

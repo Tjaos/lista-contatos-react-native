@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { ListItem, Avatar, Header } from "react-native-elements";
 import axios from "axios";
+import { apiProfessorNilson } from "../helpers/api";
 
 export default function InserirScreen({ route, navigation }) {
   const [getNome, setNome] = useState();
@@ -18,31 +19,29 @@ export default function InserirScreen({ route, navigation }) {
 
   useEffect(() => {
     if (route.params) {
-      const { nome } = route.params;
-      const { cpf } = route.params;
-      const { telefone } = route.params;
-      const { id } = route.params;
+      const { nome, cpf, telefone, id } = route.params;
 
       setNome(nome);
       setCpf(cpf);
       setTelefone(telefone);
       setId(id);
     }
-  });
+  }, []);
 
-  function alterarDados() {
-    axios.put("http://professornilson.com/testeservico/clientes/" + getId),
-      {
+  async function alterarDados() {
+    await axios
+      .put(`${apiProfessorNilson}/${getId}`, {
         nome: getNome,
         telefone: getTelefone,
         cpf: getCpf,
-      }
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      })
+
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -75,7 +74,7 @@ export default function InserirScreen({ route, navigation }) {
         <Text style={styles.loginText}>Digite seu Telefone</Text>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setTelefone(text)}
+          onChangeText={(text) => setTelefone({ place: text })}
           value={getTelefone}
         ></TextInput>
 

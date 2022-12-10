@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { ListItem, Avatar, Header } from "react-native-elements";
 import axios from "axios";
+import { apiProfessorNilson } from "../helpers/api";
 
 export default function InserirScreen({ route, navigation }) {
   const [getNome, setNome] = useState();
@@ -20,7 +21,7 @@ export default function InserirScreen({ route, navigation }) {
       "application/json;charset=utf-8";
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";*/
     await axios
-      .post("http://professornilson.com/testeservico/clientes", {
+      .post(`${apiProfessorNilson}`, {
         nome: getNome,
         telefone: getTelefone,
         cpf: getCpf,
