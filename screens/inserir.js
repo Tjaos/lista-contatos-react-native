@@ -26,9 +26,8 @@ export default function InserirScreen({ route, navigation }) {
         telefone: getTelefone,
         cpf: getCpf,
       })
-      .then(function (response) {
-        console.log(response);
-      })
+      .then(() => navigation.navigate("Listar"))
+
       .catch(function (error) {
         console.log(error);
       });
