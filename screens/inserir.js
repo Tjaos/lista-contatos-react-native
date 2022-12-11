@@ -10,12 +10,20 @@ import {
 import { ListItem, Avatar, Header } from "react-native-elements";
 import axios from "axios";
 import { apiProfessorNilson } from "../helpers/api";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 export default function InserirScreen({ route, navigation }) {
   const [getNome, setNome] = useState();
   const [getTelefone, setTelefone] = useState();
   const [getCpf, setCpf] = useState();
 
+  function mensagem() {
+    showMessage({
+      message: "registro adicionado com sucesso!",
+      type: "success",
+    });
+    inserirDados();
+  }
   async function inserirDados() {
     /* axios.defaults.headers.post["Content-Type"] =
       "application/json;charset=utf-8";
@@ -35,6 +43,7 @@ export default function InserirScreen({ route, navigation }) {
 
   return (
     <View>
+      <FlashMessage position="top" />
       <Header
         leftComponent={{
           icon: "arrow-back",
@@ -74,10 +83,7 @@ export default function InserirScreen({ route, navigation }) {
           value={getCpf}
         ></TextInput>
 
-        <TouchableOpacity
-          style={styles.botaoLog}
-          onPress={() => inserirDados()}
-        >
+        <TouchableOpacity style={styles.botaoLog} onPress={() => mensagem()}>
           <Text style={styles.botaoLogin}>Salvar</Text>
         </TouchableOpacity>
       </View>

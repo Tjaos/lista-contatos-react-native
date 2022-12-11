@@ -5,6 +5,7 @@ import { Header, Button } from "react-native-elements";
 import { ListItem, Avatar } from "react-native-elements";
 import axios from "axios";
 import { apiProfessorNilson } from "../helpers/api";
+import { avatarRosa } from "../helpers/api";
 
 export default function ListaScreen({ route, navigation }) {
   const [list, setlist] = useState([]);
@@ -37,7 +38,7 @@ export default function ListaScreen({ route, navigation }) {
           <ListItem key={indice} bottomDivider>
             <Avatar
               source={{
-                uri: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=wavatar&f=y",
+                uri: `${avatarRosa}`,
               }}
               onPress={() =>
                 navigation.navigate("Alterar", {

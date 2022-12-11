@@ -45,18 +45,22 @@ export default function InserirScreen({ route, navigation }) {
       .catch((error) => console.log(error));
   }
 
+  function messageExcluir() {
+    showMessage({
+      message: "registro excluído com sucesso!",
+      type: "danger",
+    });
+    excluirDados();
+  }
   async function excluirDados() {
     await axios
       .delete(`${apiProfessorNilson}/${getId}`)
       .then(
-        showMessage({
-          message: "registro excluído com sucesso!",
-          type: "danger",
-        }),
         setNome(null),
         setTelefone(null),
         setCpf(null),
-        setId(null)
+        setId(null),
+        navigation.navigate("Listar")
       )
       .catch((error) => console.log(error));
   }
@@ -111,7 +115,7 @@ export default function InserirScreen({ route, navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.botaoExcluir}
-          onPress={() => excluirDados()}
+          onPress={() => messageExcluir()}
         >
           <Text style={styles.botaoLogin}>Excluir</Text>
         </TouchableOpacity>
