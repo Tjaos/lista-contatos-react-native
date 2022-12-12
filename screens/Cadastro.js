@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   StyleSheet,
@@ -6,8 +6,25 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import axios from "axios";
+import { minhaApi } from "../helpers/api";
 
 export default function CadastroScreen({ navigation }) {
+  const [getEmail, setEmail] = useState();
+  const [getSenha, setSenha] = useState();
+
+  async function cadastrar() {
+    await axios
+      .post(`${minhaApi}`, {
+        email: getEmail,
+        senha: getSenha,
+      })
+      .then(() => console.log("enviou!"))
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <View
       style={[
@@ -20,11 +37,20 @@ export default function CadastroScreen({ navigation }) {
       <View style={styles.containerCadastro}>
         <Text style={styles.loginText}> E-mail</Text>
 
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={getEmail}
+        />
 
         <Text style={styles.senhaText}> Senha</Text>
-        <TextInput style={styles.input} secureTextEntry={true} />
-        <TouchableOpacity style={styles.botaoLog}>
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
+          onChangeText={(text) => setSenha(text)}
+          value={getSenha}
+        />
+        <TouchableOpacity style={styles.botaoLog} onPress={() => cadastrar()}>
           <Text style={styles.botaoLogin}>Salvar</Text>
         </TouchableOpacity>
       </View>
@@ -49,7 +75,7 @@ const styles = StyleSheet.create({
     height: 55,
     width: "85%",
     backgroundColor: "#ffffff",
-    top: "32%",
+    top: "2%",
     borderRightWidth: 1,
     borderLeftWidth: 1,
     borderTopWidth: 1,

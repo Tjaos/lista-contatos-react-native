@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextInput,
   StyleSheet,
@@ -8,8 +8,26 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Header } from "react-native-elements";
+import axios from "axios";
+import { minhaApi } from "../helpers/api";
 
 export default function LoginScreen({ navigation }) {
+  const [getEmail, setEmail] = useState();
+  const [getSenha, setSenha] = useState();
+
+  async function login() {
+    await axios
+      .post(`${minhaApi}/login`, {
+        email: getEmail,
+        senha: getSenha,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <View
       style={[
@@ -32,11 +50,20 @@ export default function LoginScreen({ navigation }) {
 
         <Text style={styles.loginText}> login</Text>
 
-        <TextInput style={styles.input} />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+          value={getEmail}
+        />
 
         <Text style={styles.senhaText}> senha</Text>
-        <TextInput style={styles.input} secureTextEntry={true} />
-        <TouchableOpacity style={styles.botaoLog}>
+        <TextInput
+          style={styles.input}
+          secureTextEntry={true}
+          onChangeText={(text) => setSenha(text)}
+          value={getSenha}
+        />
+        <TouchableOpacity style={styles.botaoLog} onPress={() => login()}>
           <Text style={styles.botaoLogin}>Login</Text>
         </TouchableOpacity>
 
